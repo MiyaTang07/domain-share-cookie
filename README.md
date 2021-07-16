@@ -7,7 +7,6 @@
 ```
 npm install domain-share-cookie -g
 ```
-- 
 
 ## Command Line 
 - If you suppose to copy siteA cookies to siteB and you could use set command. The last one will cover up the first one you set up if u set domain info twice.
