@@ -1,0 +1,15 @@
+{
+  "name": "domain-share-cookie",
+  "version": "1.0.0",
+  "description": "Share cookie information between two sites for create a chrome extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Miya <1084428295@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^8.1.2"
+  }
+}

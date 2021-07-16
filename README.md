@@ -1,15 +1,15 @@
-### Overview
+## Overview
 - This tool is to create a <a href="https://developer.chrome.com/docs/extensions/mv3/getstarted/">chrome exstension</a> for cookie share from one site to another.
 - The very basic fundamatal is read domain informations from where you input. And read this data to build a extension.
 
-### Usage
+## Usage
 - Frist of all,you need to install this package tool as global.So you cound use some convenient commands.
 ```
 npm install domain-share-cookie -g
 ```
 - 
 
-### Support 
+## Command Line 
 - If you suppose to copy siteA cookies to siteB and you could use set command. The last one will cover up the first one you set up if u set domain info twice.
 ```
 domain set from=http://A.com
