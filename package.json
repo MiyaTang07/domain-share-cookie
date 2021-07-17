@@ -6,6 +6,7 @@
   "bin": {
     "domain": "./bin/domain",
     "domain-set": "./bin/domain-set",
+    "domain-view": "./bin/domain-view",
     "domain-create": "./bin/domain-create"
   },
   "scripts": {

@@ -10,7 +10,7 @@ program
   .usage('<command> [options]')
   .command('set [options]', 'add domain url')
   .command('create [commands]', 'build a chrome extension')
-  .command('views', 'list all domains')
+  .command('view', 'list all domains')
   .option('-f, --from', 'domain url which share cookie')
   .option('-t, --to', 'domain url which need to set cookie')
  

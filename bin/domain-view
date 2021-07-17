@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+const fs = require('fs')
+const { resolve } = require('path')
+const chalk = require('chalk')
+
+fs.readFile(resolve(process.cwd(), 'domain.json'), 'utf-8', (err, content) => {
+    if (err) {
+        console.log(`${chalk.red(err.message)}`)
+        process.exit(1)
+    }
+    const { from , to } = {...JSON.parse(content)}
+    console.log(`${chalk.green('\nsupply cookie domain is 👉 ' + from)}\n`)
+    console.log(`${chalk.green('consume cookie domain is 👉 ' + from)}\n`)
+})
+
+

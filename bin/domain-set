@@ -11,6 +11,7 @@ const fs = require('fs')
 
 
 const program = new Command()
+
 const F_SETTED_INFO = 'Domain which offer cookie has been setted up🌞'
 const T_SETTED_INFO = 'Domain which consume cookie has been setted up🌞'
 const DOMAIN_REG_ERROR = '🌲Domian url is not properly formatted🌲'
@@ -84,7 +85,6 @@ function domainInfoWriteSync(options = {from: '', to: ''}) {
     if (_opts.to) {
         console.log(`${chalk.green(T_SETTED_INFO)}`)
     }
-    
     process.exit(1)
 }
 
