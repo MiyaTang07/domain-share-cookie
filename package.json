@@ -7,7 +7,7 @@
     "domain": "./bin/domain",
     "domain-set": "./bin/domain-set",
     "domain-view": "./bin/domain-view",
-    "domain-create": "./bin/domain-create"
+    "domain-init": "./bin/domain-init"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

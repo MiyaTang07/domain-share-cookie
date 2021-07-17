@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+/**
+ * step 1:询问是否将文件输出到当前目录（y/n）
+ * step 2:将chrome extension输出到对应文件夹地址
+*/
+const { Command } = require('commander')
+const { resolve } = require('path')
+const fs = require('fs')
+const chalk = require('chalk')
+const program = new Command()
+
+program
+   .usage('[options]')
+   .option('-w, --where <string>', 'url address where the extension placed')
+
+program.parse(process.argv)
+
+const options = program.opts()
+if (options) {
+   const { where } = options
+   if (where) {
+      fs.access(resolve(where), function(err) {
+         if (err && err.code === 'ENOENT') {
+           console.log(`${chalk.red('\nDirectory does not exist🌲\n')}`)
+           process.exit(1)
+         }
+         copyExtensionInfoLocalDir(where)
+       })
+   } else {
+      copyExtensionInfoLocalDir()
+   }
+}
+
+function copyExtensionInfoLocalDir(url) {
+  console.log('写入OK')
+}
+
