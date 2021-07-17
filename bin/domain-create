@@ -1,2 +1,10 @@
 #!/usr/bin/env node
-console.log('hello world')
+const { Command } = require('commander')
+
+const program = new Command()
+
+program
+   .usage('[options]')
+   .command('ext', 'create a chrome extension')
+
+program.parse(process.argv)  

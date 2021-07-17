@@ -6,7 +6,6 @@
   "bin": {
     "domain": "./bin/domain",
     "domain-set": "./bin/domain-set",
-    "domain-del": "./bin/domain-del",
     "domain-create": "./bin/domain-create"
   },
   "scripts": {

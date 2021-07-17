@@ -1,18 +1,111 @@
 #!/usr/bin/env node
-const inquirer = require('inquirer')
-const fs = require('fs')
+/**
+ * domain set -h可展示help info
+ * domain set 该commandLine为交互问询式信息收集
+ * 亦可通过 [domain set -f xxx] [domain set -t xxx]收集信息
+*/
+const { Command } = require('commander')
 const chalk = require('chalk')
+const path = require('path')
+const fs = require('fs')
 
-const urlReg = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
+
+const program = new Command()
+const F_SETTED_INFO = 'Domain which offer cookie has been setted up🌞'
+const T_SETTED_INFO = 'Domain which consume cookie has been setted up🌞'
+const DOMAIN_REG_ERROR = '🌲Domian url is not properly formatted🌲'
+const URL_REG = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
+
+/**commander optionxiao 小写的问题*/
+program
+   .usage('[options]')
+   .option('-F, --From <string>', 'add domain url which offer cookie')
+   .option('-T, --To <string>', 'add domain url which consume cookie')
+
+program.parse()
+
+/**
+ * check domain.json file exist or else create empty {} into it
+*/
+function domainFileCheck(fileName) {
+    if(!fs.existsSync(fileName)) {
+       return fs.writeFileSync(fileName, JSON.stringify({}), "utf-8", err => {
+           if(err) console.error(err)
+           console.log(chalk.red('Something wrong with writeFileSync'))
+           process.exit(1)
+       })
+    } else {
+        return fs.readFileSync(fileName, 'utf-8')
+    }
+}
+/**
+ * check if from-domain and to-domain is the same domain 
+*/
+function checkDomainConflict(info_p, info_n) {
+   const _info = Object.assign(info_p, info_n)
+   const { from, to } = _info
+   if(from === to) {
+       console.log(`${chalk.red('🌲You cannot set two same origin domain url🌲')}`)
+       process.exit(1)
+   }
+}
+
+
+/**
+ * write new domain info into domain.json file
+*/
+function domainInfoWriteSync(options = {from: '', to: ''}) {
+    
+    let domainInfo = domainFileCheck(path.resolve(process.cwd(), 'domain.json'))
+    domainInfo = domainInfo ? JSON.parse(domainInfo) : {}
+
+    const _opts = {...options}
+
+    const additionalInfo = {}
+    for(const key in _opts) {
+        const val = _opts[key]
+        if(val){
+            if (!URL_REG.test(val)) {
+                console.log(`${chalk.red(DOMAIN_REG_ERROR)}`)
+                process.exit(1)
+            }
+            additionalInfo[key] = val
+        } 
+    }
+
+    checkDomainConflict(domainInfo, additionalInfo)
+    
+    Object.assign(domainInfo, additionalInfo)
+   
+    fs.writeFileSync(path.resolve(process.cwd(), 'domain.json'), JSON.stringify(domainInfo))
+    if (_opts.from) {
+        console.log(`${chalk.green(F_SETTED_INFO)}`)
+    }
+    if (_opts.to) {
+        console.log(`${chalk.green(T_SETTED_INFO)}`)
+    }
+    
+    process.exit(1)
+}
+
+// ----------命令式收集方式start----------
+const options = program.opts()
+const { From: from, To: to } = options
+if (from || to) {
+   domainInfoWriteSync({ from, to })
+}
+// ----------命令式收集方式end----------
+
+// ----------问询式收集方式start----------
+const inquirer = require('inquirer')
 const questions = [
     {
        name: "from",
        type: "input",
-       message: "请输入提供cookie域名地址",
+       message: "请输入分享cookie的域名url",
        validate(val) {
-           // 进行正则校验
-           if (!urlReg.test(val)) {
-              return chalk.red(`域名格式有误，请重新输入`)
+           if(!URL_REG.test(val)) {
+               return chalk.red(DOMAIN_REG_ERROR)
            }
            return true
        }
@@ -20,11 +113,10 @@ const questions = [
     {
         name: "to",
         type: "input",
-        message: "请输入需要cookie信息的域名地址",
+        message: "请输入消费cookie的域名url",
         validate(val) {
-            // 进行正则校验
-           if (!urlReg.test(val)) {
-                return chalk.red(`域名格式有误，请重新输入`)
+            if(!URL_REG.test(val)) {
+                return chalk.red(DOMAIN_REG_ERROR)
             }
             return true
         }
@@ -35,6 +127,7 @@ inquirer.prompt(questions).then(output => {
     let { from, to } = output
     from = from.trim()
     to = to.trim()
-    
-    fs.writeFile(path.resolve(process.cwd(), 'domain.json'))
+    domainInfoWriteSync({ from, to })
 })
+
+// ----------问询式收集方式end----------

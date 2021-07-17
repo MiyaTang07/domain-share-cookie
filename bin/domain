@@ -1,13 +1,18 @@
 #!/usr/bin/env node
+/**
+ * 该文件仅用来显示help info
+ * **/
 const { Command } = require('commander')
 
 const program = new Command()
 program
   .version(require('../package').version)
   .usage('<command> [options]')
-  .command('set <url>', 'add domain information')
-  .command('remove <-f,-t>', 'remove one of domain information')
+  .command('set [options]', 'add domain url')
+  .command('create [commands]', 'build a chrome extension')
   .command('views', 'list all domains')
-  .command('create ext', 'generate a chrome extension')
+  .option('-f, --from', 'domain url which share cookie')
+  .option('-t, --to', 'domain url which need to set cookie')
+ 
 
-  program.parse(process.argv)
+program.parse(process.argv)
