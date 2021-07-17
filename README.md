@@ -11,18 +11,18 @@ npm install domain-share-cookie -g
 ## Command Line 
 - If you suppose to copy siteA cookies to siteB and you could use set command. The last one will cover up the first one you set up if u set domain info twice.
 ```
-domain set from=http://A.com
-domain set to=http://B.com
+domain set --from=http://A.com
+domain set --to=http://B.com
 ```
 - Other command lines support.
 ```
-domain delete from
-domain delte to
+domain del --from
+domain del --to
 ```
 - Remember the set information is always in needed!
 - Once you set up the basic information and you can run
 ```
-domain create extension
+domain create
 ```
 to build your own chrome extension.
 

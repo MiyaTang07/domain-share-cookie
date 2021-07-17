@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+const inquirer = require('inquirer')
+const fs = require('fs')
+const chalk = require('chalk')
+
+const urlReg = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
+const questions = [
+    {
+       name: "from",
+       type: "input",
+       message: "请输入提供cookie域名地址",
+       validate(val) {
+           // 进行正则校验
+           if (!urlReg.test(val)) {
+              return chalk.red(`域名格式有误，请重新输入`)
+           }
+           return true
+       }
+    },
+    {
+        name: "to",
+        type: "input",
+        message: "请输入需要cookie信息的域名地址",
+        validate(val) {
+            // 进行正则校验
+           if (!urlReg.test(val)) {
+                return chalk.red(`域名格式有误，请重新输入`)
+            }
+            return true
+        }
+    }
+]
+
+inquirer.prompt(questions).then(output => {
+    let { from, to } = output
+    from = from.trim()
+    to = to.trim()
+    
+    fs.writeFile(path.resolve(process.cwd(), 'domain.json'))
+})

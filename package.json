@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "description": "Share cookie information between two sites for create a chrome extension",
   "main": "index.js",
+  "bin": {
+    "domain": "./bin/domain",
+    "domain-set": "./bin/domain-set",
+    "domain-del": "./bin/domain-del",
+    "domain-create": "./bin/domain-create"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "cookie share"
+  ],
   "author": "Miya <1084428295@qq.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.1",
+    "commander": "^8.0.0",
     "inquirer": "^8.1.2"
   }
 }
