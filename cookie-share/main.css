@@ -1,0 +1,15 @@
+body {
+    background-color: #ffeb3b;
+    width: 200px;
+    min-height: 50px;
+    height: auto;
+    text-align: center;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color:tomato;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
