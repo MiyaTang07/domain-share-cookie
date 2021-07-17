@@ -1,3 +1,23 @@
 {
-    "name": "cookie-share"
-}
+    "name": "cookie-share",
+    "description": "cookie share from one site to another",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "index.js"
+    },
+    "action": {
+        "default-icon": {
+            "16": "/images/cookies16.png",
+            "32": "/images/cookies32.png",
+            "48": "/images/cookies48.png",
+            "128": "/images/cookies128.png"
+        }
+    },
+    "icons": {
+        "16": "/images/cookies16.png",
+        "32": "/images/cookies32.png",
+        "48": "/images/cookies48.png",
+        "128": "/images/cookies128.png"
+    }
+  }
