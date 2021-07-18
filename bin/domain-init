@@ -50,8 +50,8 @@ if (options) {
 
 function copyExtensionInfoLocalDir(url) {
    try {
-      const file = resolve(process.cwd(), 'cookie-share/domain.js')
-      fse.outputFileSync(file, `export default ${JSON.stringify(json)}`)
+      const file = resolve(process.cwd(), 'cookie-share/domain.json')
+      fse.outputFileSync(file, `${JSON.stringify(json)}`)
       fse.copySync(resolve(process.cwd(), 'cookie-share'), url)
       console.log(`${chalk.green('\nDownload successfully,all you need to do is import the cookie-share extension into\n')}`)
       console.log(`${chalk.green('chrome://extensions/\n' + '\n🎈Good luck🎈\n')}`)

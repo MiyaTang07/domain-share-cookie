@@ -1,7 +1,7 @@
 {
     "name": "cookie-share",
     "description": "cookie share from one site to another",
-    "version": "1.0",
+    "version": "1.0.0",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
@@ -22,7 +22,16 @@
         "128": "/images/cookies128.png"
     },
     "permissions":[
-        "cookies",
-        "*://*"
+        "cookies"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "web_accessible_resources": [
+       {
+         "resources": ["domain.json"],
+         "matches": [ "http://*/*", "https://*/*" ]
+       } 
     ]
   }
