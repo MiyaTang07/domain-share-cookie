@@ -15,6 +15,20 @@ program
 
 program.parse(process.argv)
 
+const json = fse.readJsonSync(resolve(process.cwd(), 'domain.json'))
+   
+const { from, to } = json
+if (!from) {
+   console.log(`${chalk.red('\nDomain which offer cookie has not been setted\n')}`)
+   console.log(`${chalk.green('use [domain set -F XXX] to add info\n')}`)
+   process.exit(1)
+}
+if (!to) {
+   console.log(`${chalk.red('\nDomain which consume cookie has not been setted\n')}`)
+   console.log(`${chalk.green('use [domain set -F XXX] to add info\n')}`)
+   process.exit(1)
+}
+ 
 const options = program.opts()
 if (options) {
    const { where } = options
@@ -36,6 +50,8 @@ if (options) {
 
 function copyExtensionInfoLocalDir(url) {
    try {
+      const file = resolve(process.cwd(), 'cookie-share/domain.js')
+      fse.outputFileSync(file, `export default ${JSON.stringify(json)}`)
       fse.copySync(resolve(process.cwd(), 'cookie-share'), url)
       console.log(`${chalk.green('\nDownload successfully,all you need to do is import the cookie-share extension into\n')}`)
       console.log(`${chalk.green('chrome://extensions/\n' + '\n🎈Good luck🎈\n')}`)

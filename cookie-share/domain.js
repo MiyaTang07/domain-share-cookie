@@ -1,0 +1,1 @@
+export default {"from":"http://a.com","to":"http://b.com"}
