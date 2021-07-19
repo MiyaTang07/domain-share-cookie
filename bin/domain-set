@@ -14,8 +14,8 @@ const program = new Command()
 
 const F_SETTED_INFO = 'Domain which offer cookie has been setted up🌞'
 const T_SETTED_INFO = 'Domain which consume cookie has been setted up🌞'
-const DOMAIN_REG_ERROR = '🌲Domian url is not properly formatted🌲'
-const URL_REG = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
+const DOMAIN_REG_ERROR = '🌲Domain url is not properly formatted🌲'
+const URL_REG = /^(?:^|\s)((https?:\/\/)?(?:localhost|[\w-]+(?:\.[\w-]+)+)(:\d+)?(\/\S*)?)$/
 
 /**commander optionxiao 小写的问题*/
 program
@@ -57,7 +57,7 @@ function checkDomainConflict(info_p, info_n) {
 */
 function domainInfoWriteSync(options = {from: '', to: ''}) {
     
-    let domainInfo = domainFileCheck(path.resolve(process.cwd(), 'domain.json'))
+    let domainInfo = domainFileCheck(path.resolve(__dirname, '../domain.json'))
     domainInfo = domainInfo ? JSON.parse(domainInfo) : {}
 
     const _opts = {...options}
@@ -78,7 +78,7 @@ function domainInfoWriteSync(options = {from: '', to: ''}) {
     
     Object.assign(domainInfo, additionalInfo)
    
-    fs.writeFileSync(path.resolve(process.cwd(), 'domain.json'), JSON.stringify(domainInfo))
+    fs.writeFileSync(path.resolve(__dirname, '../domain.json'), JSON.stringify(domainInfo))
     if (_opts.from) {
         console.log(`${chalk.green(F_SETTED_INFO)}`)
     }

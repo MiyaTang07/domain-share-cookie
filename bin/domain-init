@@ -15,7 +15,7 @@ program
 
 program.parse(process.argv)
 
-const json = fse.readJsonSync(resolve(process.cwd(), 'domain.json'))
+const json = fse.readJsonSync(resolve(__dirname, '../domain.json'))
    
 const { from, to } = json
 if (!from) {
@@ -50,9 +50,9 @@ if (options) {
 
 function copyExtensionInfoLocalDir(url) {
    try {
-      const file = resolve(process.cwd(), 'cookie-share/domain.json')
+      const file = resolve(__dirname, '../cookie-share/domain.json')
       fse.outputFileSync(file, `${JSON.stringify(json)}`)
-      fse.copySync(resolve(process.cwd(), 'cookie-share'), url)
+      fse.copySync(resolve(__dirname, '../cookie-share'), url)
       console.log(`${chalk.green('\nDownload successfully,all you need to do is import the cookie-share extension into\n')}`)
       console.log(`${chalk.green('chrome://extensions/\n' + '\n🎈Good luck🎈\n')}`)
     } catch (err) {
