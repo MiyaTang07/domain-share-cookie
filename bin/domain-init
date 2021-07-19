@@ -44,7 +44,7 @@ if (options) {
          copyExtensionInfoLocalDir(where)
        })
    } else {
-      copyExtensionInfoLocalDir(process.cwd())
+      copyExtensionInfoLocalDir(path.join(process.cwd(), 'cookie-share'))
    }
 }
 
