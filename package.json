@@ -1,6 +1,6 @@
 {
   "name": "domain-share-cookie",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Share cookie information between two sites for create a chrome extension",
   "main": "index.js",
   "bin": {
