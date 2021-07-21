@@ -10,7 +10,7 @@ fs.readFile(resolve(__dirname, '../domain.json'), 'utf-8', (err, content) => {
     }
     const { from , to } = {...JSON.parse(content)}
     console.log(`${chalk.green('\nsupply cookie domain is 👉 ' + from)}\n`)
-    console.log(`${chalk.green('consume cookie domain is 👉 ' + from)}\n`)
+    console.log(`${chalk.green('consume cookie domain is 👉 ' + to)}\n`)
 })
 
 
